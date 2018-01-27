@@ -6,6 +6,22 @@ function newApp(python, javascript) {
     mic = new Mic(micResponseHandler(nlp, python, javascript))
 }
 
+function typeEffect(element, speed) {
+    var text = $(element).text();
+    $(element).html('');
+
+    var i = 0;
+    var timer = setInterval(function () {
+        if (i < text.length) {
+            $(element).append(text.charAt(i));
+            i++;
+        } else {
+            clearInterval(timer);
+        }
+    }, speed);
+}
+
+
 function micResponseHandler(nlp, python, javascript) {
     return (text) => {
         console.log('response handler says', text)
@@ -21,6 +37,8 @@ function micResponseHandler(nlp, python, javascript) {
         if (python) {
             _insertTextAtCursor(editor2, py_result.entity)
         }
+        $('#text').html(text);
+        typeEffect($('#text'), 75);
     }
-    
+
 }

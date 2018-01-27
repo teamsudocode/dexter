@@ -112,6 +112,8 @@ body {
       font-family: 'Roboto Mono';
       font-size: 1.2em;
       letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-align: center;
       color: #00B2F7;
       position: relative; }
     .container .preview .Loader {
