@@ -1,0 +1,50 @@
+<!doctype html>
+
+<meta charset="utf-8"/>
+
+<link rel="stylesheet" href="./lib/pane1/codemirror.css">
+<link rel=stylesheet href="./lib/panel1/dialog.css">
+
+<script src="./lib/pane1/codemirror.js"></script>
+<script src="./lib/pane1/matchbrackets.js"></script>
+<script src="./lib/pane1/dialog.js"></script>
+<script src="./lib/pane1/searchcursor.js"></script>
+
+<script src="./lib/panel/vim.js"></script>
+<script src="./lib/pane1/javascript.js"></script>
+
+<style>
+  #id {
+    height: 80%;
+  }
+</style>
+
+
+
+<div><textarea id="code" name="code">
+  function fibo ( n ) {
+    if ( n == 1 || n == 0 ) {
+        return 1;
+    }
+    else {
+        return fibo( n-1 ) + fibo ( n-2 );
+    }
+
+    for (let i = 0; i < 1000; i++) {
+        console.log( fibo( i ) );
+    }
+
+</textarea></div>
+
+    <script>
+      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        lineNumbers: true,
+        matchBrackets: true,
+        mode: 'javascript',
+        showCursorWhenSelecting: true,
+        inputStyle: "contenteditable",
+        extraKeys: {"Ctrl-Q": "toggleComment"}
+      });
+    </script>
+
+   
