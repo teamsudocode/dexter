@@ -6,6 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dexter</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:400,500,700" rel="stylesheet">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var editor = CodeMirror.fromTextArea(document.getElementById("code1"), {
+                lineNumbers: true,
+                mode: 'vim',
+                matchBrackets: true,
+                mode: 'javascript',
+                showCursorWhenSelecting: true,
+                inputStyle: "contenteditable",
+                extraKeys: {
+                    "Ctrl-Q": "toggleComment"
+                }
+            });
+
+            var editor = CodeMirror.fromTextArea(document.getElementById("code2"), {
+                lineNumbers: true,
+                mode: 'vim',
+                matchBrackets: true,
+                mode: 'javascript',
+                showCursorWhenSelecting: true,
+                inputStyle: "contenteditable",
+                extraKeys: {
+                    "Ctrl-Q": "toggleComment"
+                }
+            });
+        }, false);
+
+    </script>
     <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
     <link rel="stylesheet" href="./lib/pane1/codemirror.css">
     <link rel=stylesheet href="./lib/pane1/dialog.css">
@@ -31,7 +59,7 @@
             </div>
         </div>
 
-        <div class="editors">
+        <div class="editors" id="editorspane">
             <div class="pane" id="js">
                 <div>&nbsp;</div>
                 <div class="title">
@@ -65,56 +93,10 @@
             <div id="text">Declare a variable</div>
         </div>
     </div>
-    </body>
 </body>
 
 </html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="styles/editor.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>
-    var editor1 = CodeMirror.fromTextArea(document.getElementById("code1"), {
-        lineNumbers: true,
-        keyMap: 'vim',
-        matchBrackets: true,
-        autofocus: true,
-        mode: 'javascript',
-        showCursorWhenSelecting: true,
-        inputStyle: "contenteditable"
-    });
-    
-    var editor2 = CodeMirror.fromTextArea(document.getElementById("code2"), {
-        lineNumbers: true,
-        keyMap: 'vim',
-        matchBrackets: true,
-        mode: 'python',
-        autofocus: true,
-        showCursorWhenSelecting: true,
-        inputStyle: "contenteditable",
-    });
-    // var commandDisplay = document.getElementById('command-display');
-      var keys1 = '';
-      CodeMirror.on(editor1, 'vim-keypress', function(key) {
-        keys1 = keys1 + key;
-        // commandDisplay.innerHTML = keys1;
-        console.log(keys1)
-      });
-      CodeMirror.on(editor1, 'vim-command-done', function(e) {
-        keys1 = '';
-        // commandDisplay.innerHTML = keys1;
-      });
-
-
-      //python
-      var keys2 = '';
-      CodeMirror.on(editor2, 'vim-keypress', function(key) {
-        keys2 = keys2 + key;
-        // commandDisplay.innerHTML = keys1;
-        console.log(keys2)
-      });
-      CodeMirror.on(editor2, 'vim-command-done', function(e) {
-        keys2 = '';
-        // commandDisplay.innerHTML = keys1;
-      });
-
-</script>
+<script src="js/index.js"></script>

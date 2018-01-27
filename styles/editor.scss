@@ -36,8 +36,9 @@ body {
             img {
                 margin-left: 1.5em;
                 cursor: pointer;
+                transition: all 0.2s ease-in-out;
             }
-            #hindi {
+            #hindi{
                 opacity: 0.3;
             }
         }

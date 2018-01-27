@@ -32,7 +32,8 @@ body {
         color: #5762B9; }
       .container .nav .language img {
         margin-left: 1.5em;
-        cursor: pointer; }
+        cursor: pointer;
+        transition: all 0.2s ease-in-out; }
       .container .nav .language #hindi {
         opacity: 0.3; }
   .container .editors {
