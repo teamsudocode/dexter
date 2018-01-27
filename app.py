@@ -1,7 +1,12 @@
 from flask import Flask, request, jsonify
 from judge import runProcess
 from flask_cors import CORS
-from bot import send_message
+import zulip
+
+# Keyword arguments 'email' and 'api_key' are not required if you are using ~/.zuliprc
+client = zulip.Client(email="mydexter-bot@hack36.zulipchat.com",
+                      api_key="gX6ulWhAzExkZcYSAtWgpsAMbrXLjcJn",
+                      site="https://hack36.zulipchat.com")
 
 app = Flask('dexter')
 CORS(app)
@@ -46,7 +51,11 @@ def zulip():
     # email = request.form['email']
     email = 'kuchtohtha@gmail.com'
     content = request.form['content']
-    send_message(email,  content)
+    client.send_message({
+        "type": "private",
+        "to": email,
+        "content": content,
+    })
     return 'ok'
 
 
