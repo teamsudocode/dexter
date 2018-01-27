@@ -57,7 +57,11 @@ function micResponseHandler(nlp, python, javascript) {
 
 
 function commandHandlers(command) {
-    if (command == 'move_left') {
+    if (command == 'dexter_start') {
+        dexterIsRunning = true
+    } else if (command == 'dexter_stop') {
+        dexterIsRunning = false
+    } else if (command == 'move_left') {
         if (javascript) _wmoveleft(editor1)
         if (python) _wmoveleft(editor2)
     } else if (command == 'move_right') {
@@ -69,10 +73,6 @@ function commandHandlers(command) {
     } else if (command == 'move_down') {
         if (javascript) _lineDown(editor1)
         if (python) _lineDown(editor2)
-    } else if (command == 'dexter_start') {
-        dexterIsRunning = true
-    } else if (command == 'dexter_stop') {
-        dexterIsRunning = false
     } else if (command === 'dexter_javascript'){
         python = false
         javascript = true
