@@ -32,6 +32,10 @@ function micResponseHandler(nlp, python, javascript) {
         if (!entities) {
             return
         }
+        if (IsKnownCommand(entities.intent)) {
+            commandHandlers(entities.intent)
+            return
+        }
         let py_result = py_handler(entities)
         let js_result = js_handler(entities)
         if (javascript) {
