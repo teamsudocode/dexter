@@ -114,6 +114,7 @@ body {
       letter-spacing: 0.2em;
       text-transform: uppercase;
       text-align: center;
+      line-height: 1.5em;
       color: #00B2F7;
       position: relative; }
     .container .preview .Loader {
