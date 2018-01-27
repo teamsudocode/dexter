@@ -7,7 +7,7 @@ body {
 .container {
     display: grid;
     height: 100vh;
-    grid-template-rows: 10% 70% 20%;
+    grid-template-rows: 10% 65% 25%;
     .nav {
         padding: 2em;
         display: grid;
@@ -146,7 +146,7 @@ body {
             position: relative;
         }
         $Loader-color: #00D0FA;
-        $Loader-size: 3rem;
+        $Loader-size: 3.4rem;
         $Loader-offset: 0.2rem;
         $Loader-timing: ease-in-out;
         .Loader {
@@ -180,6 +180,31 @@ body {
                 box-shadow: 0 0 0 0 $Loader-color;
                 animation-name: pulsB;
             }
+            img {
+                &:before,
+                &:after {
+                    animation-duration: 1.8s;
+                    animation-iteration-count: infinite;
+                    animation-timing-function: $Loader-timing;;
+                }
+                &:before {
+                    animation-name: pulsA;
+                }
+                &:after {
+                    animation-name: pulsB;
+                }
+            }
+        }
+        #rec-btn{
+            cursor: pointer;
+        }
+        .alive{
+            display: visible;
+        }
+        .dead{
+            margin-bottom: 3em;
+            margin-top: 1.5em;
+            display: none;
         }
         @keyframes pulsA {
             0% {

@@ -58,7 +58,7 @@
             </div>
         </div>
         <div class="preview">
-            <div class="Loader"></div>
+            <div class="Loader" id="rec-btn"><img src="static/img/mic.svg"></div>
             <div id="text">Declare a variable</div>
         </div>
     </div>
@@ -80,7 +80,7 @@
             "Ctrl-Q": "toggleComment"
         }
     });
-    
+
     var editor = CodeMirror.fromTextArea(document.getElementById("code2"), {
         lineNumbers: true,
         mode: 'vim',
@@ -92,5 +92,4 @@
             "Ctrl-Q": "toggleComment"
         }
     });
-
 </script>

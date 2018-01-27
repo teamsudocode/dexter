@@ -54,4 +54,3 @@ $(document).ready(function () {
     var delay = $('#text').text().length * speed + speed;
     typeEffect($('#text'), speed);
 });
-
