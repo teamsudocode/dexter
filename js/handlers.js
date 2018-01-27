@@ -1,12 +1,3 @@
-// function run_handler(result, languages="both") {
-//     if (languages === "both" || languages ==="js"){
-//         return js_handler(result);
-//     }
-//     else if (languages === "both" || languages ==="py"){
-//         return python_handler(result);
-//     }
-// }
-
 function js_handler(result){
     const js_handler_literal = {
         "declare_string": declare_string_js,
@@ -132,9 +123,6 @@ function declare_string_py(entities){
 function print_js(entities){
     const name = entities[""];
 }
-function dexter_js(entities){
-    
-}
 
 function if_condition_js(){
 
@@ -142,29 +130,4 @@ function if_condition_js(){
 
 function if_condition_py(){
     
-}
-
-function add_js(entities){
-    
-}
-function subtract_js(){
-    
-}
-function multiply_js(){
-    
-}
-function divide_js(){
-    
-}
-function add_py(){
-    
-}
-function subtract_py(){
-    
-}
-function multiply_py(){
-    
-}
-function divide_py(){
-
 }

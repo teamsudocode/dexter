@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Brython</title>
+<link rel="stylesheet" href="../doc/doc_brython.css">
+<link rel="stylesheet" type="text/css"
+      href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="console.css">
+
+<script type="text/javascript" src="../src/brython_builtins.js"></script>
+<script type="text/javascript" src="../src/version_info.js"></script>
+<script type="text/javascript" src="../src/py2js.js"></script>
+<script type="text/javascript" src="../src/py_object.js"></script>
+<script type="text/javascript" src="../src/py_type.js"></script>
+<script type="text/javascript" src="../src/py_utils.js"></script>
+<script type="text/javascript" src="../src/py_sort.js"></script>
+<script type="text/javascript" src="../src/py_builtin_functions.js"></script>
+<script type="text/javascript" src="../src/py_exceptions.js"></script>
+<script type="text/javascript" src="../src/py_range_slice.js"></script>
+<script type="text/javascript" src="../src/py_bytes.js"></script>
+<script type="text/javascript" src="../src/py_set.js"></script>
+<script type="text/javascript" src="../src/js_objects.js"></script>
+<script type="text/javascript" src="../src/stdlib_paths.js"></script>
+<script type="text/javascript" src="../src/py_import.js"></script>
+
+<script type="text/javascript" src="../src/unicode.min.js"></script>
+<script type="text/javascript" src="../src/py_string.js"></script>
+<script type="text/javascript" src="../src/py_int.js"></script>
+<script type="text/javascript" src="../src/py_long_int.js"></script>
+<script type="text/javascript" src="../src/py_float.js"></script>
+<script type="text/javascript" src="../src/py_complex.js"></script>
+<script type="text/javascript" src="../src/py_dict.js"></script>
+<script type="text/javascript" src="../src/py_list.js"></script>
+<script type="text/javascript" src="../src/py_generator.js"></script>
+<script type="text/javascript" src="../src/py_dom.js"></script>
+
+<script type="text/javascript" src="../src/builtin_modules.js"></script>
+<script type="text/javascript" src="../src/py_import_hooks.js"></script>
+
+<script type="text/javascript" src="../src/brython_stdlib.js"></script>
+
+<script src="ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+<script src="ace/mode-python3.js" type="text/javascript" charset="utf-8"></script>
+<script src="ace/snippets/python.js" type="text/javascript" charset="utf-8"></script>
+
+</script>
+
+<script type="text/python3" id="tests_editor">
+from browser import document as doc, window
+from browser import html
+import header
+import editor
+
+qs_lang,language = header.show()
+
+# other translations
+
+trans = {
+    'report_bugs':{'en':'Please report bugs in the ',
+                   'es':'Poner los bugs en el ',
+                   'fr':"Signalez les bugs dans l'"},
+    'test_page':{'en':'Tests page','es':'P&aacute;gina de pruebas','fr':'Page de tests'},
+    'run':{'en':'run','es':'ejecutar','fr':'Exécuter'},
+    'clear':{'en':'clear','es':'borrar','fr':'Effacer'}
+}
+
+for key in trans:
+    if key in doc:
+        doc[key].html = trans[key].get(language,trans[key]['en'])
+
+# link to test page
+tplink = doc['test_page']
+if qs_lang:
+    tplink.href += '?lang=%s' %qs_lang
+
+def set_debug(ev):
+    if ev.target.checked:
+        __BRYTHON__.debug = 1
+    else:
+        __BRYTHON__.debug = 0
+
+__BRYTHON__.debug = int(doc['set_debug'].checked)
+
+# bindings
+doc['run_js'].bind('click', window.run_js)
+doc['set_debug'].bind('change',set_debug)
+
+# next functions are defined in editor.py
+doc['show_js'].bind('click',editor.show_js)
+doc['run'].bind('click',editor.run)
+doc['show_console'].bind('click',editor.show_console)
+
+# erase "main" div
+def clear_main(ev):
+    doc['main'].text = ''
+
+main_content = 'Zone with id="main" ; use it to test interaction with DOM elements'
+
+# add "main" div
+def add_main(ev):
+    global main_content
+    try:
+        # if "main" div already exists, save content and erase container
+        main_content = doc["main"].html
+        doc["main_container"].html = ""
+        doc["add_main"].text = 'Show "main" div'
+    except KeyError:
+        t = html.TABLE()
+        row = html.TR()
+        b = html.BUTTON('Clear')
+        b.bind('click', clear_main)
+        row <= html.TD(b)+html.TD(html.DIV(Id="main"))
+        t <= row
+        doc["main_container"] <= t
+        doc["main"].html = main_content
+        doc["add_main"].text = 'Hide "main" div'
+
+doc["add_main"].bind('click', add_main)
+
+</script>
+
+<script>
+function run_js(){
+    var cons = document.getElementById("console")
+    var jscode = cons.value
+    var t0 = (new Date()).getTime()
+    eval(jscode)
+    var t1 = (new Date()).getTime()
+    console.log("Javascript code run in "+(t1-t0)+" ms")
+}
+</script>
+</head>
+<body onload="brython({debug:1})">
+
+<table id=banner cellpadding=0 cellspacing=0>
+<tr id=banner_row >
+<td class="logo"><a href="../index.html"><img src="../brython.png" class="logo"></a></td>
+</tr>
+</table>
+
+<div id="main_container"></div>
+
+<div style="text-align:center">Brython version: <span id="version"></span>
+</div>
+</center>
+
+<div id="container">
+<div id="left-div">
+<div style="padding: 3px 3px 3px 3px;">
+<button id="add_main">Add <b>&lt;div id=main&gt;</b></button>
+
+</div>
+  <div id="editor" style="width:100%;"></div>
+</div>
+
+<div id="right-div">
+<div style="padding: 3px 3px 3px 3px;">
+  <div style="float:left">
+    <button id="run"> ▶ Run</button>
+    <button id="run_js"> ▶ Run Javascript</button>
+    Debug<input type="checkbox" id="set_debug" checked>
+  </div>
+
+  <div style="float:right">
+    <button id="show_console">Python</button>
+    <button id="show_js">Javascript</button>
+  </div>
+</div>
+<div style="width:100%;height:100%;">
+<textarea id="console" autocomplete="off"></textarea>
+</div>
+</div>
+
+<div style="float:left;margin-top:50px">
+    <a href="//github.com/brython-dev/brython/issues" title="Please report Bugs on the GitHub Issue Tracker !">
+        Report a bug
+    </a><br>
+    <a href='index.html' id="test_page">
+        Built-in test suite
+    </a><br>
+    <a href='unittests/index.html'>
+        CPython tests
+    </a><br>
+</div>
+
+</body>
+</html>

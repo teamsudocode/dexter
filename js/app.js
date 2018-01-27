@@ -4,6 +4,8 @@ var mic = null;
 var python = true;
 var javascript = true;
 
+var dexterIsRunning = true;
+
 function newApp() {
     nlp = setUpNlp()
     mic = new Mic(micResponseHandler(nlp, python, javascript))
@@ -36,6 +38,10 @@ function micResponseHandler(nlp, python, javascript) {
             commandHandlers(entities.intent)
             return
         }
+
+        if (!dexterIsRunning) {
+            return
+        }
         let py_result = py_handler(entities)
         let js_result = js_handler(entities)
         if (javascript) {
@@ -63,5 +69,22 @@ function commandHandlers(command) {
     } else if (command == 'move_down') {
         if (javascript) _lineDown(editor1)
         if (python) _lineDown(editor2)
+    } else if (command == 'dexter_start') {
+        dexterIsRunning = true
+    } else if (command == 'dexter_stop') {
+        dexterIsRunning = false
+    } else if (command === 'dexter_javascript'){
+        python = false
+        javascript = true
+        console.log("Calling jsView")
+        $('#editorspane').css('grid-template-columns', '100% 0% 0%');
+    }else if (command === 'dexter_python'){
+        python = true
+        javascript = false
+        $('#editorspane').css('grid-template-columns', '0% 0% 100%');
+    }else if (command === 'dexter_full'){
+        python = true
+        javascript = true
+        $('#editorspane').css('grid-template-columns', '49.75% 0.5% 49.75%');
     }
 }
