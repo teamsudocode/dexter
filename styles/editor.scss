@@ -61,7 +61,7 @@ body {
         }
         .pane {
             display: grid;
-            grid-template-columns: auto 92%;
+            grid-template-columns: 1% 99%;
             grid-template-rows: 10% 90%;
             background-image: linear-gradient(-180deg, #2E3478 0%, #0F1C46 100%);
             .title {

@@ -7,6 +7,16 @@
     <title>Dexter</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:400,500,700" rel="stylesheet">
     <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+    <link rel="stylesheet" href="./lib/pane1/codemirror.css">
+    <link rel=stylesheet href="./lib/pane1/dialog.css">
+
+    <script src="./lib/pane1/codemirror.js"></script>
+    <script src="./lib/pane1/matchbrackets.js"></script>
+    <script src="./lib/pane1/dialog.js"></script>
+    <script src="./lib/pane1/searchcursor.js"></script>
+
+    <script src="./lib/pane1/vim.js"></script>
+    <script src="./lib/pane1/javascript.js"></script>
 </head>
 
 <body>
@@ -27,8 +37,11 @@
                     <div class="filename"><img src="static/img/js.svg"><span>index.js</span></div>
                     <div class="actions"><img src="static/img/undo.svg" id="undo"><button>Run<img src="static/img/run.svg"></button></div>
                 </div>
-                <div class="index" id="jsindex">1 </div>
-                <div class="editor" contenteditable="true" id="jseditor"></div>
+                <div></div>
+                <div>
+                    <textarea id="code1" name="code2">
+                    </textarea>
+                </div>
             </div>
             <div class="divider"></div>
             <div class="pane" id="python">
@@ -37,12 +50,15 @@
                     <div class="filename"><img src="static/img/python.svg"><span>index.py</span></div>
                     <div class="actions"><img src="static/img/undo.svg" id="undo"><button>Run<img src="static/img/run.svg"></button></div>
                 </div>
-                <div class="index" id="pyindex">1 </div>
-                <div class="editor" contenteditable="true" id="pyeditor"></div>
+                <div></div>
+                <div>
+                    <textarea id="code2" name="code2">
+                    </textarea>
+                </div>
             </div>
         </div>
         <div class="preview">
-            <div class="Loader"></div> 
+            <div class="Loader"></div>
             <div id="text">Declare a variable</div>
         </div>
     </div>
@@ -52,3 +68,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="styles/editor.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("code1"), {
+        lineNumbers: true,
+        mode: 'vim',
+        matchBrackets: true,
+        mode: 'javascript',
+        showCursorWhenSelecting: true,
+        inputStyle: "contenteditable",
+        extraKeys: {
+            "Ctrl-Q": "toggleComment"
+        }
+    });
+    
+    var editor = CodeMirror.fromTextArea(document.getElementById("code2"), {
+        lineNumbers: true,
+        mode: 'vim',
+        matchBrackets: true,
+        mode: 'javascript',
+        showCursorWhenSelecting: true,
+        inputStyle: "contenteditable",
+        extraKeys: {
+            "Ctrl-Q": "toggleComment"
+        }
+    });
+
+</script>
