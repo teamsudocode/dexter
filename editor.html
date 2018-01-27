@@ -11,12 +11,12 @@
     <link rel=stylesheet href="./lib/pane1/dialog.css">
 
     <script src="./lib/pane1/codemirror.js"></script>
-    <script src="./lib/pane1/matchbrackets.js"></script>
     <script src="./lib/pane1/dialog.js"></script>
     <script src="./lib/pane1/searchcursor.js"></script>
-
-    <script src="./lib/pane1/vim.js"></script>
     <script src="./lib/pane1/javascript.js"></script>
+    <script src="./lib/pane1/python.js"></script>
+    <script src="./lib/pane1/matchbrackets.js"></script>
+    <script src="./lib/pane1/vim.js"></script>
 </head>
 
 <body>
@@ -30,6 +30,7 @@
                 <img src="static/img/hindi.svg" id="hindi">
             </div>
         </div>
+
         <div class="editors">
             <div class="pane" id="js">
                 <div>&nbsp;</div>
@@ -39,8 +40,10 @@
                 </div>
                 <div></div>
                 <div>
-                    <textarea id="code1" name="code2">
-                    </textarea>
+                    <form>
+                        <textarea id="code1" name="code1">
+                        </textarea>
+                    </form>
                 </div>
             </div>
             <div class="divider"></div>
@@ -62,6 +65,7 @@
             <div id="text">Declare a variable</div>
         </div>
     </div>
+    </body>
 </body>
 
 </html>
@@ -69,27 +73,48 @@
 <link rel="stylesheet" href="styles/editor.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-    var editor = CodeMirror.fromTextArea(document.getElementById("code1"), {
+    var editor1 = CodeMirror.fromTextArea(document.getElementById("code1"), {
         lineNumbers: true,
-        mode: 'vim',
+        keyMap: 'vim',
         matchBrackets: true,
+        autofocus: true,
         mode: 'javascript',
         showCursorWhenSelecting: true,
-        inputStyle: "contenteditable",
-        extraKeys: {
-            "Ctrl-Q": "toggleComment"
-        }
+        inputStyle: "contenteditable"
     });
+    
+    var editor2 = CodeMirror.fromTextArea(document.getElementById("code2"), {
+        lineNumbers: true,
+        keyMap: 'vim',
+        matchBrackets: true,
+        mode: 'python',
+        autofocus: true,
+        showCursorWhenSelecting: true,
+        inputStyle: "contenteditable",
+    });
+    // var commandDisplay = document.getElementById('command-display');
+      var keys1 = '';
+      CodeMirror.on(editor1, 'vim-keypress', function(key) {
+        keys1 = keys1 + key;
+        // commandDisplay.innerHTML = keys1;
+        console.log(keys1)
+      });
+      CodeMirror.on(editor1, 'vim-command-done', function(e) {
+        keys1 = '';
+        // commandDisplay.innerHTML = keys1;
+      });
 
-    var editor = CodeMirror.fromTextArea(document.getElementById("code2"), {
-        lineNumbers: true,
-        mode: 'vim',
-        matchBrackets: true,
-        mode: 'javascript',
-        showCursorWhenSelecting: true,
-        inputStyle: "contenteditable",
-        extraKeys: {
-            "Ctrl-Q": "toggleComment"
-        }
-    });
+
+      //python
+      var keys2 = '';
+      CodeMirror.on(editor2, 'vim-keypress', function(key) {
+        keys2 = keys2 + key;
+        // commandDisplay.innerHTML = keys1;
+        console.log(keys2)
+      });
+      CodeMirror.on(editor2, 'vim-command-done', function(e) {
+        keys2 = '';
+        // commandDisplay.innerHTML = keys1;
+      });
+
 </script>
