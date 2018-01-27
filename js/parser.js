@@ -13,11 +13,12 @@ function setUpNlp() {
         { id: 'random_number', text: 'random number' },
         { id: 'x', text: 'x' },
         { id: 'y', text: 'y' },
+        { id: 'z', text: 'z' },
     ]
 
     var allowed_relational_operators = [
         { id: 'equal_to', text: 'equal to' },
-        { id: 'equal_to', text: 'is equal to' },
+        { id: 'equal_to', text: 'equal to' },
         { id: 'equal_to', text: 'equals to' },
         { id: 'equal_to', text: 'equals' },
         { id: 'greater_than', text: 'greater than' },
@@ -33,12 +34,20 @@ function setUpNlp() {
         { id: 'not', text: 'not' },
     ]
 
+    var allowed_arithmetic_operators = [
+        { id: 'sum', text: 'sum' },
+        { id: 'difference', text: 'difference' },
+        { id: 'product', text: 'product' },
+        { id: 'division', text: 'division' },
+    ]
+
     var allowed_numbers = [
         { id: 'zero', text: 'zero' },
         { id: 'one', text: 'one' },
         { id: 'two', text: 'two' },
         { id: 'three', text: 'three' },
         { id: 'four', text: 'four' },
+        { id: 'five', text: 'five' },
     ]
 
     // adding intents one by one
@@ -221,11 +230,11 @@ function setUpNlp() {
             { fromFullSentence: true, expandIntent: true },
         )
         
-        // nlp.addDocument(
-        //     'if alpha equals one and x equals zero',
-        //     'if_condition',
-        //     { fromFullSentence: true, expandIntent: true },
-        // )
+        nlp.addDocument(
+            'if alpha equals one and x equals zero',
+            'if_condition',
+            { fromFullSentence: true, expandIntent: true },
+        )
 
         // nlp.addDocument(
         //     'if with condition {if_condition_1_lhs} {if_condition_1_op} {if_condition_1_rhs} {if_condition_join_op} {if_condition_2_lhs} {if_condition_2_op} {if_condition_2_rhs}',
@@ -240,6 +249,71 @@ function setUpNlp() {
         // testing some examples
         // showResults(nlp.test('if alpha is greater than 5'))
         showResults(nlp.test('if alpha equals one or beta equals two'))
+    }
+
+    // arithmetic operations
+    {
+        nlp.addIntent('arithmetic_operation', [
+            { entity: 'arithmetic_operand_1', id: 'arithmetic_operand_1' },
+            { entity: 'arithmetic_operand_2', id: 'arithmetic_operand_2' },
+            { entity: 'arithmetic_operator', id: 'arithmetic_operator' },
+            { entity: 'arithmetic_lhs', id: 'arithmetic_lhs' },
+        ])
+
+        for (let each of ['arithmetic_operand_1', 'arithmetic_operand_2']) {
+            nlp.addEntity(new Bravey.NumberEntityRecognizer(each))
+        }
+        let arithmetc_operator = new Bravey.StringEntityRecognizer('arithmetic_operator')
+        for (let each of allowed_arithmetic_operators) {
+            arithmetc_operator.addMatch(each.id, each.text)
+        }
+        nlp.addEntity(arithmetc_operator)
+
+        let arithmetic_lhs = new Bravey.StringEntityRecognizer('arithmetic_lhs')
+        for (let each of allowed_variable_names) {
+            arithmetic_lhs.addMatch(each.id, each.text)
+        }
+        nlp.addEntity(arithmetic_lhs)
+
+        // train with some examples
+        // nlp.addDocument(
+        //     '{arithmetic_operator} {arithmetic_operand_1} and {arithmetic_operand_2} and store it in {arithmetic_lhs}',
+        //     'arithmetic_operation'
+        // )
+        nlp.addDocument(
+            'store sum of 1 and 3 in alpha',
+            'arithmetic_operation',
+            { fromFullSentence: true, expandIntent: true }
+        )
+
+        nlp.addDocument(
+            'store product of 20 and 30 in beta',
+            'arithmetic_operation',
+            { fromFullSentence: true, expandIntent: true }
+        )
+
+        nlp.addDocument(
+            'store difference of 20 and 10 in x',
+            'arithmetic_operation',
+            { fromFullSentence: true, expandIntent: true }
+        )
+
+        nlp.addDocument(
+            'store the division of 40 and 8 in y',
+            'arithmetic_operation',
+            { fromFullSentence: true, expandIntent: true }
+        )
+        // some tests
+        showResults(nlp.test('store the sum of 100 and 20 in z'))
+        
+    }
+
+    // some custom commands
+    
+    // dexter start
+    {
+        nlp.addIntent('dexter_start', [])
+
     }
 
     return nlp;
