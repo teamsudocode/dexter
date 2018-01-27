@@ -79,6 +79,18 @@ function runJavascript() {
     })
 }
 
+function runZulip() {
+    let content = editor1.getValue()
+    $.ajax({
+        url: 'http://localhost:5000/zulip',
+        type: 'POST',
+        crossDomain: true,
+        data: { content:content },
+        success: console.log,
+        error: console.log,
+    })
+}
+
 function commandHandlers(command) {
     if (command == 'dexter_start') {
         dexterIsRunning = true
@@ -112,5 +124,7 @@ function commandHandlers(command) {
     } else if (command == 'dexter_run') {
         runPython()
         runJavascript()
+    } else if (command == 'dexter_zulip') {
+        runZulip()
     }
 }

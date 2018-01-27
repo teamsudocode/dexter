@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from judge import runProcess
 from flask_cors import CORS
+from bot import send_message
 
 app = Flask('dexter')
 CORS(app)
@@ -38,6 +39,16 @@ def interpret():
 
     outBuf, errBuf = runProcess(['node', 'intermediate.js'])
     return jsonify({'out': str(outBuf), 'err': str(errBuf)})
+
+
+@app.route('/zulip', methods=['POST'])
+def zulip():
+    # email = request.form['email']
+    email = 'kuchtohtha@gmail.com'
+    content = request.form['content']
+    send_message(email,  content)
+    return 'ok'
+
 
 
 if __name__ == '__main__':
