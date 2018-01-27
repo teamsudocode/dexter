@@ -1,7 +1,9 @@
 from flask import Flask, request, jsonify
 from judge import runProcess
+from flask_cors import CORS
 
 app = Flask('dexter')
+CORS(app)
 
 
 @app.route('/compile', methods=['POST'])
