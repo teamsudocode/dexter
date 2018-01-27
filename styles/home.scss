@@ -1,0 +1,102 @@
+@import 'reset.css';
+body {
+    background: linear-gradient(-180deg, #252C70 0%, #0F1C46 100%);
+    height: 100vh;
+    overflow-y: hidden;
+}
+
+.container {
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    .logo {
+        height: 9em;
+    }
+    .textlogo {
+        margin: 2em 0 2.5em 0;
+        height: 3.5em;
+    }
+    h1 {
+        font-family: 'Roboto';
+        font-size: 1.2em;
+        color: #FFFFFF;
+        letter-spacing: 0.3em;
+        margin-bottom: 2em;
+        text-transform: uppercase;
+    }
+    .video-play-button {
+        position: absolute;
+        z-index: 10;
+        top: 65%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        box-sizing: content-box;
+        display: block;
+        width: 28px;
+        height: 48px;
+        border-radius: 50%;
+        transition-duration: 0.15s;
+        transition-timing-function: ease-in-out;
+        transition-property: background;
+        padding: 18px 20px 18px 28px;
+    }
+    .video-play-button:before {
+        content: "";
+        position: absolute;
+        z-index: 0;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        display: block;
+        width: 120px;
+        height: 120px;
+        background: #114276;
+        border-radius: 50%;
+        animation: pulse-border 1500ms ease-out infinite;
+    }
+    .video-play-button:after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        display: block;
+        width: 120px;
+        height: 120px;
+        background: #00B2F7;
+        border-radius: 50%;
+        transition: all 200ms;
+    }
+    .video-play-button:hover:after {
+        background-color: darken(#00B2F7, 5%);
+    }
+    .video-play-button img {
+        position: relative;
+        z-index: 3;
+        max-width: 100%;
+        width: auto;
+        height: auto;
+    }
+    .video-play-button span {
+        display: block;
+        position: relative;
+        z-index: 3;
+        width: 0;
+        height: 0;
+        border-left: 32px solid #fff;
+        border-top: 22px solid transparent;
+        border-bottom: 22px solid transparent;
+    }
+    @keyframes pulse-border {
+        0% {
+            transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+            opacity: 1;
+        }
+        100% {
+            transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+            opacity: 0;
+        }
+    }
+}

@@ -1,0 +1,206 @@
+@import 'reset.css';
+body {
+    max-height: 100%;
+    overflow-y: hidden;
+}
+
+.container {
+    display: grid;
+    height: 100vh;
+    grid-template-rows: 10% 70% 20%;
+    .nav {
+        padding: 2em;
+        display: grid;
+        grid-template-columns: 20% 60% 20%;
+        background: #121E4A;
+        box-shadow: 0 5px 4px 0 rgba(3, 16, 64, 0.54);
+        span {
+            font-family: 'Roboto';
+            font-size: 14px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.50);
+            letter-spacing: 6px;
+            text-align: center;
+        }
+        .language {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            p {
+                display: inline-block;
+                font-family: 'Roboto';
+                font-size: 14px;
+                font-weight: 400;
+                color: #5762B9;
+            }
+            img {
+                margin-left: 1.5em;
+                cursor: pointer;
+            }
+            #hindi {
+                opacity: 0.3;
+            }
+        }
+    }
+    .editors {
+        display: grid;
+        grid-template-columns: 49.75% 0.5% 49.75%;
+        #js {
+            .title {
+                .filename {
+                    border-bottom: 2px solid #FF309D;
+                }
+            }
+        }
+        #python {
+            .title {
+                .filename {
+                    border-bottom: 2px solid #00B2F7;
+                }
+            }
+        }
+        .pane {
+            display: grid;
+            grid-template-columns: auto 92%;
+            grid-template-rows: 10% 90%;
+            background-image: linear-gradient(-180deg, #2E3478 0%, #0F1C46 100%);
+            .title {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 1em;
+                .filename {
+                    display: inline-block;
+                    img {
+                        vertical-align: middle;
+                        margin-right: 0.5em;
+                    }
+                    span {
+                        font-family: 'Roboto';
+                        font-size: 1em;
+                        font-weight: 500;
+                        vertical-align: middle;
+                        color: #FFFFFF;
+                        letter-spacing: 0.44px;
+                    }
+                }
+                .actions {
+                    display: flex;
+                    padding: 0 1em;
+                    #undo {
+                        cursor: pointer;
+                    }
+                    button {
+                        margin-left: 2em;
+                        cursor: pointer;
+                        background: #42A15E;
+                        border-radius: 2px;
+                        font-family: Roboto;
+                        font-weight: 500;
+                        border: none;
+                        padding: 0.5em;
+                        font-size: 0.8em;
+                        color: #FFFFFF;
+                        img {
+                            margin-left: 0.5em;
+                        }
+                    }
+                }
+            }
+            .index {
+                padding: 0px 1em 1em 1em;
+                font-family: 'Roboto Mono';
+                text-align: center;
+                font-size: 1em;
+                color: rgba(255, 255, 255, 0.22);
+                line-height: 1.55em;
+            }
+            .editor {
+                background-color: transparent;
+                border: none;
+                font-family: 'Roboto Mono';
+                font-size: 1em;
+                color: #FFF;
+                line-height: 1.55em;
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+        .divider {
+            background-color: #495297;
+        }
+    }
+    .preview {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background-image: linear-gradient(-180deg, #122256 0%, #0B164B 100%);
+        div {
+            font-family: 'Roboto Mono';
+            font-size: 1.2em;
+            letter-spacing: 0.2em;
+            color: #00B2F7;
+            position: relative;
+        }
+        $Loader-color: #00D0FA;
+        $Loader-size: 3rem;
+        $Loader-offset: 0.2rem;
+        $Loader-timing: ease-in-out;
+        .Loader {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: $Loader-size;
+            margin-top: $Loader-size/2;
+            margin-bottom: $Loader-size;
+            &:before,
+            &:after {
+                content: "";
+                position: absolute;
+                border-radius: 50%;
+                animation-duration: 1.8s;
+                animation-iteration-count: infinite;
+                animation-timing-function: $Loader-timing;
+                filter: drop-shadow(0 0 $Loader-offset/2.25 rgba($Loader-color, 0.75));
+            }
+            &:before {
+                width: 100%;
+                padding-bottom: 100%;
+                box-shadow: inset 0 0 0 $Loader-offset $Loader-color;
+                animation-name: pulsA;
+            }
+            &:after {
+                width: calc(100% - #{$Loader-offset}*2);
+                padding-bottom: calc(100% - #{$Loader-offset}*2);
+                box-shadow: 0 0 0 0 $Loader-color;
+                animation-name: pulsB;
+            }
+        }
+        @keyframes pulsA {
+            0% {
+                box-shadow: inset 0 0 0 $Loader-offset $Loader-color;
+                opacity: 1;
+            }
+            50%,
+            100% {
+                box-shadow: inset 0 0 0 0 $Loader-color;
+                opacity: 0;
+            }
+        }
+        @keyframes pulsB {
+            0%,
+            50% {
+                box-shadow: 0 0 0 0 $Loader-color;
+                opacity: 0;
+            }
+            100% {
+                box-shadow: 0 0 0 $Loader-offset $Loader-color;
+                opacity: 1;
+            }
+        }
+    }
+}
