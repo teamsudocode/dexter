@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CodeFlask Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="lib/codeflask.css">
+    <link rel="stylesheet" href="lib/prism.min.css">
+    <script src="lib/prism.min.js"></script>
+    <script src="lib/codeflask.js"></script>
+    <style>
+        #my {
+            width:350px;
+            height:250px;
+            position:relative; /* Position must be: relative, absolute or fixed */
+            font-style: bold;
+            font-size: 8em;
+            background: yellow;
+        }
+    </style>
+</head>
+<body>   
+    <div class="codeview" id="my"></div>
+    <script>
+        var flask = new CodeFlask;
+        
+        flask.run('#my', {
+            language: 'js',
+            lineNumbers: false
+        });
+        flask.onUpdate(function(code){
+            console.log(code);
+        });
+    </script>
+</body>
+</html>
