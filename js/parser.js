@@ -1,3 +1,66 @@
+var allowed_variable_names = [
+    { id: 'alpha', text: 'alpha' },
+    { id: 'beta', text: 'beta' },
+    { id: 'gamma', text: 'gamma' },
+    { id: 'my_variable', text: 'my variable' },
+    { id: 'random_number', text: 'random number' },
+    { id: 'x', text: 'x' },
+    { id: 'y', text: 'y' },
+    { id: 'z', text: 'z' },
+]
+
+var allowed_relational_operators = [
+    { id: 'equal_to', text: 'equal to' },
+    { id: 'equal_to', text: 'equal to' },
+    { id: 'equal_to', text: 'equals to' },
+    { id: 'equal_to', text: 'equals' },
+    { id: 'greater_than', text: 'greater than' },
+    { id: 'greater_than', text: 'is greater than' },
+    { id: 'less_than', text: 'less than' },
+    { id: 'less_than', text: 'is less than' },
+]
+
+// var allowed_logical_operators = [ 'and', 'or', 'not' ]
+var allowed_logical_operators = [
+    { id: 'and', text: 'and' },
+    { id: 'or', text: 'or' },
+    { id: 'not', text: 'not' },
+]
+
+var allowed_arithmetic_operators = [
+    { id: 'sum', text: 'sum' },
+    { id: 'difference', text: 'difference' },
+    { id: 'product', text: 'product' },
+    { id: 'division', text: 'division' },
+]
+
+var allowed_numbers = [
+    { id: 'zero', text: 'zero' },
+    { id: 'one', text: 'one' },
+    { id: 'two', text: 'two' },
+    { id: 'three', text: 'three' },
+    { id: 'four', text: 'four' },
+    { id: 'five', text: 'five' },
+]
+
+var allowed_function_names = [
+    { id: 'fibonacci', text: 'fibonacci' },
+    { id: 'factorial', text: 'factorial' },
+    { id: 'prime_finder', text: 'prime finder' },
+]
+
+var known_commands = [
+    { id: 'move_up', text: 'move up' },
+    { id: 'move_down', text: 'move down' },
+    { id: 'move_left', text: 'move left' },
+    { id: 'move_right', text: 'move right' },
+
+    { id: 'dexter_start', text: 'dexter start' },
+    { id: 'dexter_stop', text: 'dexter_stop' },
+]
+
+
+
 function setUpNlp() {
     if (window.Bravey === undefined) {
         throw "Bravey is not available";
@@ -5,57 +68,6 @@ function setUpNlp() {
 
     var nlp = new Bravey.Nlp.Fuzzy();
         
-    var allowed_variable_names = [
-        { id: 'alpha', text: 'alpha' },
-        { id: 'beta', text: 'beta' },
-        { id: 'gamma', text: 'gamma' },
-        { id: 'my_variable', text: 'my variable' },
-        { id: 'random_number', text: 'random number' },
-        { id: 'x', text: 'x' },
-        { id: 'y', text: 'y' },
-        { id: 'z', text: 'z' },
-    ]
-
-    var allowed_relational_operators = [
-        { id: 'equal_to', text: 'equal to' },
-        { id: 'equal_to', text: 'equal to' },
-        { id: 'equal_to', text: 'equals to' },
-        { id: 'equal_to', text: 'equals' },
-        { id: 'greater_than', text: 'greater than' },
-        { id: 'greater_than', text: 'is greater than' },
-        { id: 'less_than', text: 'less than' },
-        { id: 'less_than', text: 'is less than' },
-    ]
-
-    // var allowed_logical_operators = [ 'and', 'or', 'not' ]
-    var allowed_logical_operators = [
-        { id: 'and', text: 'and' },
-        { id: 'or', text: 'or' },
-        { id: 'not', text: 'not' },
-    ]
-
-    var allowed_arithmetic_operators = [
-        { id: 'sum', text: 'sum' },
-        { id: 'difference', text: 'difference' },
-        { id: 'product', text: 'product' },
-        { id: 'division', text: 'division' },
-    ]
-
-    var allowed_numbers = [
-        { id: 'zero', text: 'zero' },
-        { id: 'one', text: 'one' },
-        { id: 'two', text: 'two' },
-        { id: 'three', text: 'three' },
-        { id: 'four', text: 'four' },
-        { id: 'five', text: 'five' },
-    ]
-
-    var allowed_function_names = [
-        { id: 'fibonacci', text: 'fibonacci' },
-        { id: 'factorial', text: 'factorial' },
-        { id: 'prime_finder', text: 'prime finder' },
-    ]
-
     // adding intents one by one
 
     // declare_integer
@@ -169,24 +181,24 @@ function setUpNlp() {
         showResults(nlp.test('make a loop for 20 counts'));
     }
 
-    // move cursor around
-    {
-        nlp.addIntent('move_cursor_to_line', [
-            { entity: 'move_cursor_to_line_number', id: 'move_cursor_to_line_number' },
-        ]);
+    // move cursor to line
+    // {
+    //     nlp.addIntent('move_cursor_to_line', [
+    //         { entity: 'move_cursor_to_line_number', id: 'move_cursor_to_line_number' },
+    //     ]);
 
-        let move_cursor_to_line_number = new Bravey.NumberEntityRecognizer('move_cursor_to_line_number');
-        nlp.addEntity(move_cursor_to_line_number);
-        // train with some examples;
-        nlp.addDocument(
-            'Move cursor to line {move_cursor_to_line_number}',
-            'move_cursor_to_line'
-        );
+    //     let move_cursor_to_line_number = new Bravey.NumberEntityRecognizer('move_cursor_to_line_number');
+    //     nlp.addEntity(move_cursor_to_line_number);
+    //     // train with some examples;
+    //     nlp.addDocument(
+    //         'Move cursor to line {move_cursor_to_line_number}',
+    //         'move_cursor_to_line'
+    //     );
 
-        // test it
-        showResults(nlp.test('move cursor to line 100'));
-        showResults(nlp.test('place cursor on line 343'));
-    }
+    //     // test it
+    //     showResults(nlp.test('move cursor to line 100'));
+    //     showResults(nlp.test('place cursor on line 343'));
+    // }
 
     // if_else
     {
@@ -330,21 +342,11 @@ function setUpNlp() {
     }
 
     // some custom commands
-    
-    // dexter start
-    {
-        nlp.addIntent('dexter_start', [])
-        nlp.addDocument('dexter start', 'dexter_start')
-
-        showResults(nlp.test('dexter start'))
+  
+    for (let command of known_commands) {
+        nlp.addDocument(command.text, command.id, { fromFullSentence: true, expandIntent: true })
     }
-
-    // dexter stop
-    {
-        nlp.addIntent('dexter_stop', [])
-        nlp.addDocument('dexter stop', 'dexter_stop')
-        showResults(nlp.test('dexter stop'))
-    }
+   
 
     return nlp;
 }
