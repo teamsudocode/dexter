@@ -49,8 +49,8 @@ class Mic {
                     // this.final_transcript += event.results[i][0].transcript + '. ';
                 }
             }
-            console.log('mic says:', this.current_transcript)
-            this.resultReceiver(this.current_transcript)
+            console.log('mic says:', this.current_transcript.toLowerCase())
+            this.resultReceiver(this.current_transcript.toLowerCase())
 
             // this.final_transcript = Mic.capitalize(this.final_transcript);
             // askWatson(current_transcript, change);

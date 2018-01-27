@@ -1,26 +1,26 @@
-class App {
-    constructor(python, javascript) {
-        this.mic = new Mic(this.micResponseHandler)
-        this.nlp = setUpNlp()
-        this.handlerExecutor = run_handler
-        this.python = python
-        this.javascript = javascript
-    }
+var nlp = null;
+var mic = null;
 
-    micResponseHandler(text) {
+function newApp(python, javascript) {
+    nlp = setUpNlp()
+    mic = new Mic(micResponseHandler(nlp, python, javascript))
+}
+
+function micResponseHandler(nlp, python, javascript) {
+    return (text) => {
         console.log('response handler says', text)
-        let entities = this.nlp.test(text)
+        let entities = nlp.test(text)
         if (!entities) {
             return
         }
-        let py_result = py_handler(result)
-        let js_result = js_handler(result)
-        if (this.javascript) {
+        let py_result = py_handler(entities)
+        let js_result = js_handler(entities)
+        if (javascript) {
             _insertTextAtCursor(editor1, js_result.entity)
         }
-        if (this.python) {
+        if (python) {
             _insertTextAtCursor(editor2, py_result.entity)
         }
     }
-
+    
 }
