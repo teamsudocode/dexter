@@ -30,18 +30,19 @@ class Mic {
             console.log("Recognition not set up. This should not happen.");
             return;
         }
-        this.recognition.onstart = function () {
+        this.recognition.onstart = () => {
             this.listening = true;
         };
-        this.recognition.onerror = function (event) {
+        this.recognition.onerror = (event) => {
             console.log("recognition says: wtf " + event.error);
         };
-        this.recognition.onend = function () {
-            if (this.listening && this.recognition) {
+        this.recognition.onend = () => {
+            if (this.listening && this.recognition !== undefined) {
+                console.log('restarting mic')
                 this.recognition.start();
             }
         };
-        this.recognition.onresult = function (event) {
+        this.recognition.onresult = (event) => {
             for (var i = event.resultIndex; i < event.results.length; ++i) {
                 if (event.results[i].isFinal) {
                     this.current_transcript = event.results[i][0].transcript;
