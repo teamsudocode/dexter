@@ -55,6 +55,29 @@ function micResponseHandler(nlp, python, javascript) {
     }
 }
 
+function runPython() {
+    let content = editor2.getValue()
+    $.ajax({
+        url: 'http://localhost:5000/compile',
+        type: 'POST',
+        crossDomain: true,
+        data: { content:content },
+        success: console.log,
+        error: console.log,
+    })
+}
+
+function runPython() {
+    let content = editor1.getValue()
+    $.ajax({
+        url: 'http://localhost:5000/js',
+        type: 'POST',
+        crossDomain: true,
+        data: { content:content },
+        success: console.log,
+        error: console.log,
+    })
+}
 
 function commandHandlers(command) {
     if (command == 'dexter_start') {
