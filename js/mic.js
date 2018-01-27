@@ -1,5 +1,5 @@
 class Mic {
-    constructor() {
+    constructor(resultReceiver) {
         this.langs = [
             ['English (India)', 'en-IN'],
             ['Hindi', 'hi-IN']
@@ -12,7 +12,7 @@ class Mic {
         this.listening = false;
         this.languageSelector = null;
         this.currentLanguage = this.langs[0][1];
-        this.resultDisplay = null;
+        this.resultReceiver = resultReceiver;
     }
 
     static capitalize(s) {
@@ -49,30 +49,37 @@ class Mic {
                     // this.final_transcript += event.results[i][0].transcript + '. ';
                 }
             }
-            console.log(this.current_transcript)
+            console.log('mic says:', this.current_transcript)
+            this.resultReceiver(this.current_transcript)
+
             // this.final_transcript = Mic.capitalize(this.final_transcript);
             // askWatson(current_transcript, change);
             // console.log(this.current_transcript, '--', this.final_transcript);
-            if (this.resultDisplay)
-                this.resultDisplay.innerText = this.current_transcript;
+            // if (this.resultDisplay)
+            //     this.resultDisplay.innerText = this.current_transcript;
             // final_span.innerHTML = linebreak(final_transcript);
         };
     }
 
-    setupMic(micElem, outputElem, languageSelect, errorHandlerDiv) {
-        // setup language selectors
-        if (languageSelect) {
-            languageSelector = languageSelect;
-            while (languageSelect.options.length > 0)
-                languageSelect.options.remove(0);
-            for (let i = 0; i < this.langs.length; i++)
-                languageSelect.options.add(new Option(this.langs[i][0], this.langs[i][1]));
-        }
-
-        // setup mic elem
-        micElem.onclick = micClicked;
-        resultDisplay = outputElem;
+    // garbage
+    setupMic(resultReceiver) {
+        this.resultReceiver = resultReceiver
     }
+
+    // setupMic(micElem, outputElem, languageSelect, errorHandlerDiv) {
+    //     // setup language selectors
+    //     if (languageSelect) {
+    //         languageSelector = languageSelect;
+    //         while (languageSelect.options.length > 0)
+    //             languageSelect.options.remove(0);
+    //         for (let i = 0; i < this.langs.length; i++)
+    //             languageSelect.options.add(new Option(this.langs[i][0], this.langs[i][1]));
+    //     }
+
+    //     // setup mic elem
+    //     micElem.onclick = micClicked;
+    //     resultDisplay = outputElem;
+    // }
 
     setLang(lang) {
         if (lang == 'en') this.currentLanguage = 'en-IN';
@@ -107,7 +114,6 @@ class Mic {
         if (this.recognition)
             this.listening = false;
         this.recognition = null;
-        this.resultDisplay = null;
     }
 
 }
