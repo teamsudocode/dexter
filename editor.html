@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dexter</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:400,500,700" rel="stylesheet">
+    <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
 </head>
 
 <body>
     <div class="container">
         <div class="nav">
-            <img src="static/img/text-logo.svg">
+            <a href="index.html"><img src="static/img/text-logo.svg"></a>
             <span id="status">Listening...</span>
             <div class="language">
                 <p>Active Language</p>
@@ -21,330 +22,27 @@
         </div>
         <div class="editors">
             <div class="pane" id="js">
-                <div>&nbsp</div>
+                <div>&nbsp;</div>
                 <div class="title">
                     <div class="filename"><img src="static/img/js.svg"><span>index.js</span></div>
                     <div class="actions"><img src="static/img/undo.svg" id="undo"><button>Run<img src="static/img/run.svg"></button></div>
                 </div>
-                <div class="index">1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 </div>
-                <textarea></textarea>
+                <div class="index" id="jsindex">1 </div>
+                <div class="editor" contenteditable="true" id="jseditor"></div>
             </div>
             <div class="divider"></div>
             <div class="pane" id="python">
-                <div>&nbsp</div>
+                <div>&nbsp;</div>
                 <div class="title">
                     <div class="filename"><img src="static/img/python.svg"><span>index.py</span></div>
                     <div class="actions"><img src="static/img/undo.svg" id="undo"><button>Run<img src="static/img/run.svg"></button></div>
                 </div>
-                <div class="index">1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 </div>
-                <textarea></textarea>
+                <div class="index" id="pyindex">1 </div>
+                <div class="editor" contenteditable="true" id="pyeditor"></div>
             </div>
         </div>
         <div class="preview">
-            <div id="text">Declare a variable a with value 60</div>
-            
-            <div class='wrap'>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-  <div class='c'></div>
-</div>
+            <div id="text">Declare a variable</div>
         </div>
     </div>
 </body>
@@ -352,4 +50,5 @@
 </html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="styles/editor.css">
-<script src="js/app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/index.js"></script>
