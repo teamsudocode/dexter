@@ -4,6 +4,8 @@ var mic = null;
 var python = true;
 var javascript = true;
 
+var dexterIsRunning = true;
+
 function newApp() {
     nlp = setUpNlp()
     mic = new Mic(micResponseHandler(nlp, python, javascript))
@@ -30,6 +32,13 @@ function micResponseHandler(nlp, python, javascript) {
         console.log('response handler says', text)
         let entities = nlp.test(text)
         if (!entities) {
+            return
+        }
+        if (IsKnownCommand(entities.intent)) {
+            commandHandlers(entities.intent)
+            return
+        }
+        if (!dexterIsRunning) {
             return
         }
         let py_result = py_handler(entities)
@@ -59,5 +68,9 @@ function commandHandlers(command) {
     } else if (command == 'move_down') {
         if (javascript) _lineDown(editor1)
         if (python) _lineDown(editor2)
+    } else if (command == 'dexter_start') {
+        dexterIsRunning = true
+    } else if (command == 'dexter_stop') {
+        dexterIsRunning = false
     }
 }
