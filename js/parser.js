@@ -4,6 +4,42 @@ function setUpNlp() {
     }
 
     var nlp = new Bravey.Nlp.Fuzzy();
+        
+    var allowed_variable_names = [
+        { id: 'alpha', text: 'alpha' },
+        { id: 'beta', text: 'beta' },
+        { id: 'gamma', text: 'gamma' },
+        { id: 'my_variable', text: 'my variable' },
+        { id: 'random_number', text: 'random number' },
+        { id: 'x', text: 'x' },
+        { id: 'y', text: 'y' },
+    ]
+
+    var allowed_relational_operators = [
+        { id: 'equal_to', text: 'equal to' },
+        { id: 'equal_to', text: 'is equal to' },
+        { id: 'equal_to', text: 'equals to' },
+        { id: 'equal_to', text: 'equals' },
+        { id: 'greater_than', text: 'greater than' },
+        { id: 'greater_than', text: 'is greater than' },
+        { id: 'less_than', text: 'less than' },
+        { id: 'less_than', text: 'is less than' },
+    ]
+
+    // var allowed_logical_operators = [ 'and', 'or', 'not' ]
+    var allowed_logical_operators = [
+        { id: 'and', text: 'and' },
+        { id: 'or', text: 'or' },
+        { id: 'not', text: 'not' },
+    ]
+
+    var allowed_numbers = [
+        { id: 'zero', text: 'zero' },
+        { id: 'one', text: 'one' },
+        { id: 'two', text: 'two' },
+        { id: 'three', text: 'three' },
+        { id: 'four', text: 'four' },
+    ]
 
     // adding intents one by one
 
@@ -15,12 +51,11 @@ function setUpNlp() {
         ]);
 
         let declare_integer_var_name = new Bravey.StringEntityRecognizer('declare_integer_var_name');
-        declare_integer_var_name.addMatch('alpha', 'alpha');
-        declare_integer_var_name.addMatch('beta', 'beta');
-        declare_integer_var_name.addMatch('gamma', 'gamma');
-        declare_integer_var_name.addMatch('my_variable', 'my variable');
-        nlp.addEntity(declare_integer_var_name);
 
+        for (let each of allowed_variable_names) {
+            declare_integer_var_name.addMatch(each.id, each.text)
+        }
+        nlp.addEntity(declare_integer_var_name);
 
         let declare_integer_var_value = new Bravey.NumberEntityRecognizer('declare_integer_var_value');
         nlp.addEntity(declare_integer_var_value);
@@ -38,9 +73,9 @@ function setUpNlp() {
 
     //create_function
     {
-        nlp.addIntent('create_function',[
-            { entity: 'create_function_name', id: 'create_function_name'},
-            { entity: 'create_function_argument', id: 'create_function_argument'},
+        nlp.addIntent('create_function', [
+            { entity: 'create_function_name', id: 'create_function_name' },
+            { entity: 'create_function_argument', id: 'create_function_argument' },
         ]);
         let create_function_name = new Bravey.StringEntityRecognizer('create_function_name');
         create_function_name.addMatch('fibonacci', 'fibonacci');
@@ -65,10 +100,9 @@ function setUpNlp() {
         ]);
 
         let declare_integer_var_name = new Bravey.StringEntityRecognizer('declare_integer_var_name');
-        declare_integer_var_name.addMatch('alpha', 'alpha');
-        declare_integer_var_name.addMatch('beta', 'beta');
-        declare_integer_var_name.addMatch('gamma', 'gamma');
-        declare_integer_var_name.addMatch('my_variable', 'my variable');
+        for (let each of allowed_variable_names) {
+            declare_integer_var_name.addMatch(each.id, each.text)
+        }
         nlp.addEntity(declare_integer_var_name);
 
         let declare_integer_var_value = new Bravey.NumberEntityRecognizer('declare_integer_var_value');
@@ -124,11 +158,99 @@ function setUpNlp() {
         showResults(nlp.test('place cursor on line 343'));
     }
 
+    // if_else
+    {
+        nlp.addIntent('if_condition', [
+            { entity: 'if_condition_1_lhs', id: 'if_condition_1_lhs' },
+            { entity: 'if_condition_1_op', id: 'if_condition_1_op' },
+            { entity: 'if_condition_1_rhs', id: 'if_condition_1_rhs' },
+            
+            { entity: 'if_condition_join_op', id: 'if_condition_join_op' },
+            
+            { entity: 'if_condition_2_lhs', id: 'if_condition_2_lhs' },
+            { entity: 'if_condition_2_op', id: 'if_condition_2_op' },
+            { entity: 'if_condition_2_rhs', id: 'if_condition_2_rhs' },
+        ]);
+
+        // for lhs, match with variable names
+        for (let target of ['if_condition_1_lhs', 'if_condition_2_lhs']) {
+            let variable_name = new Bravey.StringEntityRecognizer(target)
+            for (let each of allowed_variable_names) {
+                variable_name.addMatch(each.id, each.text)
+            }
+            nlp.addEntity(variable_name)
+        }
+
+        // for rhs, match with numbers
+        for (let target of ['if_condition_1_rhs', 'if_condition_2_rhs']) {
+            let number = new Bravey.StringEntityRecognizer(target)
+            for (let each of allowed_numbers) {
+                number.addMatch(each.id, each.text)
+            }
+            nlp.addEntity(number)
+        }
+
+        // for lhs, rhs, the relational operators
+        for (let target of ['if_condition_1_op', 'if_condition_2_op']) {
+            let operator = new Bravey.StringEntityRecognizer(target)
+            for (let each of allowed_relational_operators) {
+                operator.addMatch(each.id, each.text)
+            }
+            nlp.addEntity(operator)
+        }
+
+        // for the two clauses
+        {
+            let operator = new Bravey.StringEntityRecognizer('if_condition_join_op')
+            for (let each of allowed_logical_operators) {
+                operator.addMatch(each.id, each.text)
+            }
+            nlp.addEntity(operator)
+        }
+        
+        // lets train it
+        nlp.addDocument(
+            'if alpha equals one and alpha equals two',
+            'if_condition',
+            { fromFullSentence: true, expandIntent: true },
+        )
+
+        nlp.addDocument(
+            'if alpha equals one or beta equals one',
+            'if_condition',
+            { fromFullSentence: true, expandIntent: true },
+        )
+        
+        // nlp.addDocument(
+        //     'if alpha equals one and x equals zero',
+        //     'if_condition',
+        //     { fromFullSentence: true, expandIntent: true },
+        // )
+
+        // nlp.addDocument(
+        //     'if with condition {if_condition_1_lhs} {if_condition_1_op} {if_condition_1_rhs} {if_condition_join_op} {if_condition_2_lhs} {if_condition_2_op} {if_condition_2_rhs}',
+        //     'if_condition'
+        // )
+
+        // nlp.addDocument(
+        //     'if {if_condition_1_lhs} {if_condition_1_op} {if_condition_1_rhs}',
+        //     'if_condition'
+        // )
+
+        // testing some examples
+        // showResults(nlp.test('if alpha is greater than 5'))
+        showResults(nlp.test('if alpha equals one or beta equals two'))
+    }
+
     return nlp;
 }
 
 function showResults(result) {
-    for (let entity of result.entities) {
-        console.log(entity.id, entity.value);
+    if (result) {
+        for (let entity of result.entities) {
+            console.log(entity.id, entity.value);
+        }
+    } else {
+        console.log('something failed here')
     }
 }
