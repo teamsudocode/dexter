@@ -50,6 +50,12 @@ function setUpNlp() {
         { id: 'five', text: 'five' },
     ]
 
+    var allowed_function_names = [
+        { id: 'fibonacci', text: 'fibonacci' },
+        { id: 'factorial', text: 'factorial' },
+        { id: 'prime_finder', text: 'prime finder' },
+    ]
+
     // adding intents one by one
 
     // declare_integer
@@ -75,6 +81,11 @@ function setUpNlp() {
             'declare_integer'
         );
 
+        nlp.addDocument(
+            'Create an integer {declare_integer_var_name} with value {declare_integer_var_value}',
+            'declare_integer'
+        );
+
         // test it
         showResults(nlp.test('declare an integer alpha with value 100'));
         // nlp.test('Declare an integer with value 100')
@@ -86,18 +97,28 @@ function setUpNlp() {
             { entity: 'create_function_name', id: 'create_function_name' },
             { entity: 'create_function_argument', id: 'create_function_argument' },
         ]);
-        let create_function_name = new Bravey.StringEntityRecognizer('create_function_name');
-        create_function_name.addMatch('fibonacci', 'fibonacci');
-        nlp.addEntity(create_function_name);
-        let create_function_argument = new Bravey.StringEntityRecognizer('create_function_argument');
-        create_function_argument.addMatch('alpha', 'alpha');
+        // let create_function_name = new Bravey.StringEntityRecognizer('create_function_name')
+        // create_function_name.addMatch('fibonacci', 'fibonacci')
+        // nlp.addEntity(create_function_name)
+
+        let create_function_name = new Bravey.StringEntityRecognizer('create_function_name')
+        for (let each of allowed_function_names) {
+            create_function_name.addMatch(each.id, each.text)
+        }
+        nlp.addEntity(create_function_name)
+
+        let create_function_argument = new Bravey.StringEntityRecognizer('create_function_argument')
+        for (let each of allowed_variable_names) {
+            create_function_argument.addMatch(each.id, each.text)
+        }
 
         nlp.addEntity(create_function_argument);
 
         nlp.addDocument(
             'Create a function {create_function_name} with argument {create_function_argument}',
             'create_function'
-        );
+        )
+
         showResults(nlp.test('create function fibonacci with argument alpha.'));
     }
 
