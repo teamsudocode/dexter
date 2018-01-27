@@ -60,6 +60,10 @@ var known_commands = [
     { id: 'dexter_javascript', text: 'dexter javascript'},
     { id: 'dexter_python', text: 'dexter python'},
     { id: 'dexter_full', text: 'dexter full'},
+
+    { id: 'dexter_run', text: 'dexter run code' },
+    { id: 'dexter_run', text: 'code chala do bhai' },
+    { id: 'dexter_run', text: 'arey bhai bhai bhai' }
 ]
 
 function IsKnownCommand(command) {

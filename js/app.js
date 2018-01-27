@@ -67,7 +67,7 @@ function runPython() {
     })
 }
 
-function runPython() {
+function runJavascript() {
     let content = editor1.getValue()
     $.ajax({
         url: 'http://localhost:5000/js',
@@ -105,9 +105,12 @@ function commandHandlers(command) {
         python = true
         javascript = false
         $('#editorspane').css('grid-template-columns', '0% 0% 100%');
-    }else if (command === 'dexter_full'){
+    } else if (command === 'dexter_full'){
         python = true
         javascript = true
         $('#editorspane').css('grid-template-columns', '49.75% 0.5% 49.75%');
+    } else if (command == 'dexter_run') {
+        runPython()
+        runJavascript()
     }
 }
