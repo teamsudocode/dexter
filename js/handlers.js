@@ -75,7 +75,7 @@ function create_loop_py(entities){
     const upper_bound = entities['create_loop_counts'].value;
     return ({
         intent: "insert",
-        entity: `for i in range(${upper_bound}):\n`,
+        entity: `for i in range(${upper_bound}):\n\t`,
         movement_callback: []
     });
 }
@@ -128,6 +128,12 @@ function declare_string_py(entities){
     });
 }
 
+function print_js(entities){
+    const name = entities[""];
+}
+function dexter_js(entities){
+    
+}
 
 function if_condition_js(){
 
@@ -137,3 +143,27 @@ function if_condition_py(){
     
 }
 
+function add_js(entities){
+    
+}
+function subtract_js(){
+    
+}
+function multiply_js(){
+    
+}
+function divide_js(){
+    
+}
+function add_py(){
+    
+}
+function subtract_py(){
+    
+}
+function multiply_py(){
+    
+}
+function divide_py(){
+
+}

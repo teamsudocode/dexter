@@ -348,6 +348,31 @@ function setUpNlp() {
     }
    
 
+    // print function
+    {
+        nlp.addIntent('print', [
+            { entity: 'argument', id: 'argument' }
+        ]);
+
+        let argument = new Bravey.StringEntityRecognizer('argument');
+        for (let each of allowed_variable_names) {
+            argument.addMatch(each.id, each.text)
+        }
+        nlp.addEntity(argument);
+
+        // train with some examples
+        nlp.addDocument(
+            'print {argument}',
+            'print'
+        );
+
+        // test it
+        showResults(nlp.test('print alpha'));
+        // nlp.test('Declare an integer with value 100')
+    }
+
+    
+
     return nlp;
 }
 
