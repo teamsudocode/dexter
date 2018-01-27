@@ -51,7 +51,8 @@ body {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        padding: 1em; }
+        padding: 1em;
+        height: 1.7em; }
         .container .editors .pane .title .filename {
           display: inline-block; }
           .container .editors .pane .title .filename img {
