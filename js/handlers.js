@@ -19,7 +19,7 @@ function js_handler(result){
 
     let entity = result.intent;
     let function_handler = js_handler_literal[entity];
-    let entities = {}
+    let entities = {};
     for (let i of result.entities){
         entities[i.id] = i;
     }
@@ -56,9 +56,8 @@ function create_function_js(entities){
     const arg = entities['create_function_argument'].value;
     return ({
         intent: "insert",
-        entity: `function ${name}(${arg}){
-
-}`
+        entity: `function ${name}(${arg}){\n\n}`,
+        movement_callback: ["_lineUp"]
     });
 }
 
@@ -67,14 +66,17 @@ function create_function_py(entities){
     const arg = entities['create_function_argument'].value;
     return ({
         intent: "insert",
-        entity: `def ${name}(${arg}):`
+        entity: `def ${name}(${arg}):\n`,
+        movement_callback: []
+
     });
 }
 function create_loop_py(entities){
     const upper_bound = entities['create_loop_counts'].value;
     return ({
         intent: "insert",
-        entity: `for i in range(${upper_bound}):`
+        entity: `for i in range(${upper_bound}):\n`,
+        movement_callback: []
     });
 }
 
@@ -82,18 +84,18 @@ function create_loop_js(entities){
     const upper_bound = entities['create_loop_counts'].value;
     return ({
         intent: "insert",
-        entity: `for (i = 0; i < ${upper_bound}; i++){
-
-}`
+        entity: `for (i = 0; i < ${upper_bound}; i++){\n\n}`,
+        movement_callback: [_lineUp]
     });
 }
 
 function declare_integer_js(entities){
-    const name = entities["declare_integer_var_name"].value
-    const value = entities["declare_integer_var_value"].value
+    const name = entities["declare_integer_var_name"].value;
+    const value = entities["declare_integer_var_value"].value;
     return ({
         intent: "insert",
-        entity: `var ${name} = ${value};`
+        entity: `var ${name} = ${value};\n`,
+        movement_callback: []
     });
 }
 
@@ -102,7 +104,8 @@ function declare_integer_py(entities){
     const value = entities["declare_integer_var_value"].value
     return ({
         intent: "insert",
-        entity: `${name} = ${value}`
+        entity: `${name} = ${value}\n`,
+        movement_callback: []
     });
 }
 function declare_string_js(entities){
@@ -110,7 +113,8 @@ function declare_string_js(entities){
     const value = entities["declare_string_var_value"].value
     return ({
         intent: "insert",
-        entity: `var ${name} = ${value};`
+        entity: `var ${name} = ${value};\n`,
+        movement_callback: []
     });
 }
 
@@ -119,7 +123,8 @@ function declare_string_py(entities){
     const value = entities["declare_string_var_value"].value
     return ({
         intent: "insert",
-        entity: `${name} = ${value}`
+        entity: `${name} = ${value}\n`,
+        movement_callback: []
     });
 }
 
