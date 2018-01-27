@@ -260,51 +260,51 @@ function setUpNlp() {
             { entity: 'arithmetic_lhs', id: 'arithmetic_lhs' },
         ])
 
-        for (let each of ['arithmetic_operand_1', 'arithmetic_operand_2']) {
-            nlp.addEntity(new Bravey.NumberEntityRecognizer(each))
-        }
+        nlp.addEntity(new Bravey.NumberEntityRecognizer('arithmetic_operand_2'))
         let arithmetc_operator = new Bravey.StringEntityRecognizer('arithmetic_operator')
         for (let each of allowed_arithmetic_operators) {
             arithmetc_operator.addMatch(each.id, each.text)
         }
         nlp.addEntity(arithmetc_operator)
 
-        let arithmetic_lhs = new Bravey.StringEntityRecognizer('arithmetic_lhs')
-        for (let each of allowed_variable_names) {
-            arithmetic_lhs.addMatch(each.id, each.text)
+        for (let target of ['arithmetic_operand_1', 'arithmetic_lhs']) {
+            let variable_name = new Bravey.StringEntityRecognizer(target)
+            for (let each of allowed_variable_names) {
+                variable_name.addMatch(each.id, each.text)
+            }
+            nlp.addEntity(variable_name)
         }
-        nlp.addEntity(arithmetic_lhs)
-
+    
         // train with some examples
         // nlp.addDocument(
         //     '{arithmetic_operator} {arithmetic_operand_1} and {arithmetic_operand_2} and store it in {arithmetic_lhs}',
         //     'arithmetic_operation'
         // )
         nlp.addDocument(
-            'store sum of 1 and 3 in alpha',
+            'store sum of x and 3 in alpha',
             'arithmetic_operation',
             { fromFullSentence: true, expandIntent: true }
         )
 
         nlp.addDocument(
-            'store product of 20 and 30 in beta',
+            'store product of alpha and 30 in beta',
             'arithmetic_operation',
             { fromFullSentence: true, expandIntent: true }
         )
 
         nlp.addDocument(
-            'store difference of 20 and 10 in x',
+            'store difference of gamma and 10 in x',
             'arithmetic_operation',
             { fromFullSentence: true, expandIntent: true }
         )
 
         nlp.addDocument(
-            'store the division of 40 and 8 in y',
+            'store the division of y and 8 in y',
             'arithmetic_operation',
             { fromFullSentence: true, expandIntent: true }
         )
         // some tests
-        showResults(nlp.test('store the sum of 100 and 20 in z'))
+        showResults(nlp.test('store the sum of z and 20 in z'))
         
     }
 
@@ -313,7 +313,16 @@ function setUpNlp() {
     // dexter start
     {
         nlp.addIntent('dexter_start', [])
+        nlp.addDocument('dexter start', 'dexter_start')
 
+        showResults(nlp.test('dexter start'))
+    }
+
+    // dexter stop
+    {
+        nlp.addIntent('dexter_stop', [])
+        nlp.addDocument('dexter stop', 'dexter_stop')
+        showResults(nlp.test('dexter stop'))
     }
 
     return nlp;
