@@ -59,6 +59,12 @@ var known_commands = [
     { id: 'dexter_stop', text: 'dexter_stop' },
 ]
 
+function IsKnownCommand(command) {
+    for (let each of known_commands) {
+        if (each.id == command) return true
+    }
+    return false
+}
 
 
 function setUpNlp() {

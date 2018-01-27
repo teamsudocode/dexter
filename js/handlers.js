@@ -25,6 +25,7 @@ function js_handler(result){
     }
     return function_handler(entities);
 }
+
 function py_handler(result){
     const py_handler_literal = {
         "declare_string": declare_string_py,

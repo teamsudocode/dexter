@@ -1,7 +1,10 @@
 var nlp = null;
 var mic = null;
 
-function newApp(python, javascript) {
+var python = true;
+var javascript = true;
+
+function newApp() {
     nlp = setUpNlp()
     mic = new Mic(micResponseHandler(nlp, python, javascript))
 }
@@ -40,5 +43,21 @@ function micResponseHandler(nlp, python, javascript) {
         $('#text').html(text);
         typeEffect($('#text'), 75);
     }
+}
 
+
+function commandHandlers(command) {
+    if (command == 'move_left') {
+        if (javascript) _wmoveleft(editor1)
+        if (python) _wmoveleft(editor2)
+    } else if (command == 'move_right') {
+        if (javascript) _wmoveright(editor1)
+        if (python) _wmoveright(editor2)
+    } else if (command == 'move_up') {
+        if (javascript) _lineUp(editor1)
+        if (python) _lineUp(editor2)
+    } else if (command == 'move_down') {
+        if (javascript) _lineDown(editor1)
+        if (python) _lineDown(editor2)
+    }
 }
