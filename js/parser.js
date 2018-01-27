@@ -145,28 +145,28 @@ function setUpNlp() {
 
     // declare_string
     {
-        nlp.addIntent('declare_integer', [
-            { entity: 'declare_integer_var_name', id: 'declare_integer_var_name' },
-            { entity: 'declare_integer_var_value', id: 'declare_integer_var_value' },
+        nlp.addIntent('declare_string', [
+            { entity: 'declare_string_var_name', id: 'declare_string_var_name' },
+            { entity: 'declare_string_var_value', id: 'declare_string_var_value' },
         ]);
 
-        let declare_integer_var_name = new Bravey.StringEntityRecognizer('declare_integer_var_name');
+        let declare_string_var_name = new Bravey.StringEntityRecognizer('declare_string_var_name');
         for (let each of allowed_variable_names) {
-            declare_integer_var_name.addMatch(each.id, each.text)
+            declare_string_var_name.addMatch(each.id, each.text)
         }
-        nlp.addEntity(declare_integer_var_name);
+        nlp.addEntity(declare_string_var_name);
 
-        let declare_integer_var_value = new Bravey.NumberEntityRecognizer('declare_integer_var_value');
-        nlp.addEntity(declare_integer_var_value);
+        let declare_string_var_value = new Bravey.NumberEntityRecognizer('declare_string_var_value');
+        nlp.addEntity(declare_string_var_value);
 
         // train with some examples
         nlp.addDocument(
-            'Declare an integer {declare_integer_var_name} with value {declare_integer_var_value}',
-            'declare_integer'
+            'Declare an string {declare_string_var_name} with value {declare_string_var_value}',
+            'declare_string'
         );
 
         // test it
-        showResults(nlp.test('declare an integer alpha with value 100'));
+        showResults(nlp.test('declare an string alpha with value tomato'));
         // nlp.test('Declare an integer with value 100')
     }
 

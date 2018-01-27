@@ -5,7 +5,8 @@ function js_handler(result){
         "create_function": create_function_js,
         "create_loop": create_loop_js,
         "move_cursor_to_line": move_cursor_to_line,
-        "if_condition": if_condition_js
+        "if_condition": if_condition_js,
+        "print": print_js,
     };
 
     let entity = result.intent;
@@ -24,7 +25,8 @@ function py_handler(result){
         "create_function": create_function_py,
         "create_loop": create_loop_py,
         "move_cursor_to_line": move_cursor_to_line,
-        "if_condition": if_condition_py
+        "if_condition": if_condition_py,
+        "print": print_py,
     };
 
     let entity = result.intent;
@@ -130,4 +132,19 @@ function if_condition_js(){
 
 function if_condition_py(){
     
+}
+function print_js(entities){
+    const arg = entities["argument"].value
+    return ({
+        intent: "insert",
+        entity: `console.log(${arg})\n`
+    });
+}
+
+function print_py(entities){
+    const arg = entities["argument"].value
+    return ({
+        intent: "insert",
+        entity: `print(${arg})`
+    });
 }
