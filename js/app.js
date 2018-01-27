@@ -72,5 +72,18 @@ function commandHandlers(command) {
         dexterIsRunning = true
     } else if (command == 'dexter_stop') {
         dexterIsRunning = false
+    } else if (command === 'dexter_javascript'){
+        python = false
+        javascript = true
+        console.log("Calling jsView")
+        $('#editorspane').css('grid-template-columns', '100% 0% 0%');
+    }else if (command === 'dexter_python'){
+        python = true
+        javascript = false
+        $('#editorspane').css('grid-template-columns', '0% 0% 100%');
+    }else if (command === 'dexter_full'){
+        python = true
+        javascript = true
+        $('#editorspane').css('grid-template-columns', '49.75% 0.5% 49.75%');
     }
 }
