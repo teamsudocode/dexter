@@ -5,7 +5,7 @@ Ever wondered if you could simply talk to the computer in your natural language,
 #### Dexter is an AI-based code editor that allows you to code parallely in Javascript and Python just by conversing with it. It supports two of the most widely used languages in the country, Hindi and English.
 
 ## For the computer professionals
-Typing on keyboard for long hours can prove fatal for a computer engineers. [According to a study](https://web.eecs.umich.edu/~cscott/rsi.html##book), Individuals who use type for more than two to four hours a day are at a high risk of getting RSI (Repetitive Strain Injury). 
+Typing on keyboard for long hours can prove fatal for a computer engineers. [According to a study](https://web.eecs.umich.edu/~cscott/rsi.html##book), Individuals who type for more than two to four hours a day are at a high risk of getting RSI (Repetitive Strain Injury). 
 
 In addition to RSI, Carpal Tunnel Syndrome (a stress-related injury caused by repetitive movement of joints) has become very common among Computer professionals due to poorly placed computer components and extensive typing over a long period of time.
 
