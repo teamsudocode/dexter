@@ -80,7 +80,7 @@ function runJavascript() {
     let showJsResult = (result) => {
         $('#jsfile').html('output')
         console.log(result)
-        editor2.setValue(result.out.replace('b\'', ''))
+        editor1.setValue(result.out.replace('b\'', ''))
     }
     $.ajax({
         url: 'http://localhost:5000/js',
@@ -136,6 +136,10 @@ function commandHandlers(command) {
         $('#editorspane').css('grid-template-columns', '49.75% 0.5% 49.75%');
     } else if (command == 'dexter_run') {
         runPython()
+        runJavascript()
+    } else if (command == 'dexter_run_py') {
+        runPython()
+    } else if (command == 'dexter_run_js') {
         runJavascript()
     } else if (command == 'dexter_zulip') {
         runZulip()

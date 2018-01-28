@@ -134,7 +134,7 @@ function if_condition_py(){
     
 }
 function print_js(entities){
-    const arg = entities["argument"].value
+    const arg = (entities["argument"] === undefined) ? (entities['number'].value) : (entities['argument'].value)
     return ({
         intent: "insert",
         entity: `console.log(${arg})\n`
@@ -142,9 +142,9 @@ function print_js(entities){
 }
 
 function print_py(entities){
-    const arg = entities["argument"].value
+    const arg = (entities["argument"] === undefined) ? (entities['number'].value) : (entities['argument'].value)
     return ({
         intent: "insert",
-        entity: `print(${arg})`
+        entity: `print(${arg})\n`
     });
 }

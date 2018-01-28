@@ -64,9 +64,11 @@ var known_commands = [
 
     { id: 'dexter_clear', text: 'dexter clear' },
 
-    { id: 'dexter_run', text: 'dexter run code' },
-    { id: 'dexter_run', text: 'code chala do bhai' },
-    { id: 'dexter_run', text: 'arey bhai bhai bhai' },
+    // { id: 'dexter_run', text: 'dexter run code' },
+    // { id: 'dexter_run', text: 'code chala do bhai' },
+    { id: 'dexter_run_py', text: 'arey bhai bhai bhai' },
+    { id: 'dexter_run_py', text: 'dexter run python' },
+    { id: 'dexter_run_js', text: 'dexter run javascript' },
     { id: 'dexter_zulip', text: 'zulip pe bhej do' },
     { id: 'dexter_zulip', text: 'dexter save' },
 ]
@@ -369,7 +371,8 @@ function setUpNlp() {
     // print function
     {
         nlp.addIntent('print', [
-            { entity: 'argument', id: 'argument' }
+            { entity: 'argument', id: 'argument' },
+            { entity: 'number', id: 'number' },
         ]);
 
         let argument = new Bravey.StringEntityRecognizer('argument');
@@ -378,14 +381,22 @@ function setUpNlp() {
         }
         nlp.addEntity(argument);
 
+        nlp.addEntity(new Bravey.NumberEntityRecognizer('number'))
+
         // train with some examples
         nlp.addDocument(
             'print {argument}',
             'print'
         );
 
+        nlp.addDocument(
+            'print {number}',
+            'print'
+        )
+
         // test it
         showResults(nlp.test('print alpha'));
+        showResults(nlp.test('print 100'))
         // nlp.test('Declare an integer with value 100')
     }
 
