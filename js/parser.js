@@ -51,10 +51,15 @@ var allowed_function_names = [
 ]
 
 var known_commands = [
-    { id: 'move_up', text: 'move up' },
-    { id: 'move_down', text: 'move down' },
-    { id: 'move_left', text: 'move left' },
-    { id: 'move_right', text: 'move right' },
+    { id: 'js_move_up', text: 'javascript move up' },
+    { id: 'js_move_down', text: 'javascript move down' },
+    { id: 'js_move_left', text: 'javascript move left' },
+    { id: 'js_move_right', text: 'javascript move right' },
+
+    { id: 'py_move_up', text: 'python move up' },
+    { id: 'py_move_down', text: 'python move down' },
+    { id: 'py_move_left', text: 'python move left' },
+    { id: 'py_move_right', text: 'python move right' },
 
     { id: 'dexter_start', text: 'dexter start' },
     { id: 'dexter_stop', text: 'dexter stop' },
@@ -71,6 +76,11 @@ var known_commands = [
     { id: 'dexter_run_js', text: 'dexter run javascript' },
     { id: 'dexter_zulip', text: 'zulip pe bhej do' },
     { id: 'dexter_zulip', text: 'dexter save' },
+
+    { id: 'dexter_undo', text: 'dexter undo' },
+    { id: 'dexter_redo', text: 'dexter redo'},
+
+    { id: 'dexter_add_closing_bracket', text: 'dexter add closing bracket' },
 ]
 
 function IsKnownCommand(command) {

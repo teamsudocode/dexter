@@ -109,18 +109,26 @@ function commandHandlers(command) {
         dexterIsRunning = true
     } else if (command == 'dexter_stop') {
         dexterIsRunning = false
-    } else if (command == 'move_left') {
-        if (javascript) _wmoveleft(editor1)
+    } 
+      
+     else if (command == 'py_move_left') {
         if (python) _wmoveleft(editor2)
-    } else if (command == 'move_right') {
-        if (javascript) _wmoveright(editor1)
+    } else if (command == 'py_move_right') {
         if (python) _wmoveright(editor2)
-    } else if (command == 'move_up') {
-        if (javascript) _lineUp(editor1)
+    } else if (command == 'py_move_up') {
         if (python) _lineUp(editor2)
-    } else if (command == 'move_down') {
-        if (javascript) _lineDown(editor1)
+    } else if (command == 'py_move_down') {
         if (python) _lineDown(editor2)
+    }
+    
+     else if (command == 'js_move_left') {
+        if (javascript) _wmoveleft(editor1)
+    } else if (command == 'js_move_right') {
+        if (javascript) _wmoveright(editor1)
+    } else if (command == 'js_move_up') {
+        if (javascript) _lineUp(editor1)
+    } else if (command == 'js_move_down') {
+        if (javascript) _lineDown(editor1)
     } else if (command === 'dexter_javascript'){
         python = false
         javascript = true
@@ -148,5 +156,11 @@ function commandHandlers(command) {
         $('#jsfile').html('index.js')
         $('#pyfile').html('index.py')
         editor1.setValue('')
+    } else if (command == 'dexter_redo') {
+        _undo()
+    } else if (command == 'dexter_redo') {
+        _redo()
+    } else if (command == 'dexter_add_closing_bracket') {
+
     }
 }
