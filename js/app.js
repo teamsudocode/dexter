@@ -57,25 +57,38 @@ function micResponseHandler(nlp, python, javascript) {
 
 function runPython() {
     let content = editor2.getValue()
+
+    let showPyResult = (result) => {
+        $('#pyfile').html('output')
+        editor2.setValue(result.out.replace('b\'', ''))
+    }
+
     $.ajax({
         url: 'http://localhost:5000/compile',
         type: 'POST',
         crossDomain: true,
         data: { content:content },
-        success: console.log,
-        error: console.log,
+        success: showPyResult,
+        error: showPyResult,
     })
+
 }
 
 function runJavascript() {
     let content = editor1.getValue()
+
+    let showJsResult = (result) => {
+        $('#jsfile').html('output')
+        console.log(result)
+        editor2.setValue(result.out.replace('b\'', ''))
+    }
     $.ajax({
         url: 'http://localhost:5000/js',
         type: 'POST',
         crossDomain: true,
         data: { content:content },
-        success: console.log,
-        error: console.log,
+        success: showJsResult,
+        error: showJsResult,
     })
 }
 
@@ -126,5 +139,10 @@ function commandHandlers(command) {
         runJavascript()
     } else if (command == 'dexter_zulip') {
         runZulip()
+    } else if (command == 'dexter_clear') {
+        editor2.setValue('')
+        $('#jsfile').html('index.js')
+        $('#pyfile').html('index.py')
+        editor1.setValue('')
     }
 }

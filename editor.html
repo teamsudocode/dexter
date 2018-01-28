@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +9,7 @@
     <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
     <link rel="stylesheet" href="./lib/pane1/codemirror.css">
     <link rel=stylesheet href="./lib/pane1/dialog.css">
-    
+
     <script src="./lib/pane1/codemirror.js"></script>
     <script src="./lib/pane1/dialog.js"></script>
     <script src="./lib/pane1/searchcursor.js"></script>
@@ -31,12 +30,12 @@
                 <img src="static/img/hindi.svg" id="hindi">
             </div>
         </div>
-        
+
         <div class="editors" id="editorspane">
             <div class="pane" id="js">
                 <div>&nbsp;</div>
                 <div class="title">
-                    <div class="filename"><img src="static/img/js.svg"><span>index.js</span></div>
+                    <div class="filename"><img src="static/img/js.svg"><span id="jsfile">index.js</span></div>
                     <div class="actions"><img src="static/img/undo.svg" id="undo"><button>Run<img src="static/img/run.svg"></button></div>
                 </div>
                 <div></div>
@@ -51,7 +50,7 @@
             <div class="pane" id="python">
                 <div>&nbsp;</div>
                 <div class="title">
-                    <div class="filename"><img src="static/img/python.svg"><span>index.py</span></div>
+                    <div class="filename"><img src="static/img/python.svg"><span id="pyfile">index.py</span></div>
                     <div class="actions"><img src="static/img/undo.svg" id="undo"><button>Run<img src="static/img/run.svg"></button></div>
                 </div>
                 <div></div>
@@ -81,87 +80,88 @@
 <script src="js/index.js"></script>
 <script src="js/app.js"></script>
 <script>
- var editor1 = CodeMirror.fromTextArea(document.getElementById("code1"), {
-     lineNumbers: true,
-     keyMap: 'vim',
-     matchBrackets: true,
-     autofocus: true,
-     mode: 'javascript',
-     showCursorWhenSelecting: true,
-     inputStyle: "contenteditable"
- });
- 
- var editor2 = CodeMirror.fromTextArea(document.getElementById("code2"), {
-     lineNumbers: true,
-     keyMap: 'vim',
-     matchBrackets: true,
-     mode: 'python',
-     autofocus: true,
-     showCursorWhenSelecting: true,
-     inputStyle: "contenteditable",
- });
- // var commandDisplay = document.getElementById('command-display');
- var keys1 = '';
- CodeMirror.on(editor1, 'vim-keypress', function(key) {
-     keys1 = keys1 + key;
-     // commandDisplay.innerHTML = keys1;
-     console.log(keys1)
- });
- CodeMirror.on(editor1, 'vim-command-done', function(e) {
-     keys1 = '';
-     // commandDisplay.innerHTML = keys1;
- });
- 
- 
- //python
- var keys2 = '';
- CodeMirror.on(editor2, 'vim-keypress', function(key) {
-     keys2 = keys2 + key;
-     // commandDisplay.innerHTML = keys1;
-     console.log(keys2)
- });
- CodeMirror.on(editor2, 'vim-command-done', function(e) {
-     keys2 = '';
-     // commandDisplay.innerHTML = keys1;
- });
- 
- //insert code in both editors
- function _insertTextAtCursor(editor, text) {
-     var doc = editor.getDoc();
-     var cursor = doc.getCursor();
-     doc.replaceRange(text, cursor);
- }
- //undo and redo
- function _undo() {
-     var doc1 = editor1.getDoc();
-     var doc2 = editor2.getDoc();
-     doc1.undo()
-     doc2.undo()
- }
+    var editor1 = CodeMirror.fromTextArea(document.getElementById("code1"), {
+        lineNumbers: true,
+        keyMap: 'vim',
+        matchBrackets: true,
+        autofocus: true,
+        mode: 'javascript',
+        showCursorWhenSelecting: true,
+        inputStyle: "contenteditable"
+    });
 
- function _redo() {
-     var doc1 = editor1.getDoc();
-     var doc2 = editor2.getDoc();
-     doc1.redo()
-     doc2.redo()
- }
+    var editor2 = CodeMirror.fromTextArea(document.getElementById("code2"), {
+        lineNumbers: true,
+        keyMap: 'vim',
+        matchBrackets: true,
+        mode: 'python',
+        autofocus: true,
+        showCursorWhenSelecting: true,
+        inputStyle: "contenteditable",
+    });
+    // var commandDisplay = document.getElementById('command-display');
+    var keys1 = '';
+    CodeMirror.on(editor1, 'vim-keypress', function(key) {
+        keys1 = keys1 + key;
+        // commandDisplay.innerHTML = keys1;
+        console.log(keys1)
+    });
+    CodeMirror.on(editor1, 'vim-command-done', function(e) {
+        keys1 = '';
+        // commandDisplay.innerHTML = keys1;
+    });
 
- //movement
- function _wmoveright (editor) {
-     let a = editor.doc.cm.execCommand('goWordRight')
 
- }
- function _wmoveleft (editor) {
-     let a = editor.doc.cm.execCommand('goWordLeft')
- }
- function _lineUp (editor) {
-     let a = editor.doc.cm.execCommand('goLineUp')
- }
- function _lineDown (editor) {
-     let a = editor.doc.cm.execCommand('goLineDown')
- }
- 
+    //python
+    var keys2 = '';
+    CodeMirror.on(editor2, 'vim-keypress', function(key) {
+        keys2 = keys2 + key;
+        // commandDisplay.innerHTML = keys1;
+        console.log(keys2)
+    });
+    CodeMirror.on(editor2, 'vim-command-done', function(e) {
+        keys2 = '';
+        // commandDisplay.innerHTML = keys1;
+    });
 
+    //insert code in both editors
+    function _insertTextAtCursor(editor, text) {
+        var doc = editor.getDoc();
+        var cursor = doc.getCursor();
+        doc.replaceRange(text, cursor);
+    }
+    //undo and redo
+    function _undo() {
+        var doc1 = editor1.getDoc();
+        var doc2 = editor2.getDoc();
+        doc1.undo()
+        doc2.undo()
+    }
+
+    function _redo() {
+        var doc1 = editor1.getDoc();
+        var doc2 = editor2.getDoc();
+        doc1.redo()
+        doc2.redo()
+    }
+
+    //movement
+    function _wmoveright(editor) {
+        let a = editor.doc.cm.execCommand('goWordRight')
+
+    }
+
+    function _wmoveleft(editor) {
+        let a = editor.doc.cm.execCommand('goWordLeft')
+    }
+
+    function _lineUp(editor) {
+        let a = editor.doc.cm.execCommand('goLineUp')
+    }
+
+    function _lineDown(editor) {
+        let a = editor.doc.cm.execCommand('goLineDown')
+    }
 </script>
 
 

@@ -7,6 +7,7 @@ var allowed_variable_names = [
     { id: 'x', text: 'x' },
     { id: 'y', text: 'y' },
     { id: 'z', text: 'z' },
+    { id: 'i', text: 'i' },
 ]
 
 var allowed_relational_operators = [
@@ -61,11 +62,13 @@ var known_commands = [
     { id: 'dexter_python', text: 'dexter python'},
     { id: 'dexter_full', text: 'dexter full'},
 
+    { id: 'dexter_clear', text: 'dexter clear' },
+
     { id: 'dexter_run', text: 'dexter run code' },
     { id: 'dexter_run', text: 'code chala do bhai' },
     { id: 'dexter_run', text: 'arey bhai bhai bhai' },
     { id: 'dexter_zulip', text: 'zulip pe bhej do' },
-    { id: 'dexter_zulip', text: 'dexter send to zulip' },
+    { id: 'dexter_zulip', text: 'dexter save' },
 ]
 
 function IsKnownCommand(command) {
