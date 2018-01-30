@@ -15,12 +15,17 @@ Won 1st Prize at Hack36, MNNIT Allahabad.
 ```
 $ git clone https://github.com/himanshub16/dexter.git
 $ cd dexter
+$ pip install --user flask flask-cors zulip
 $ python3 app.py
 ```
+
 Open another terminal window
 
 ```
 $ cd dexter
 $ python3 -m http.server
 ```
-Navigate to localhost:8080.
+Navigate to localhost:8000.
+
+**Additional requirement**:
+`nodejs` to run `javascript` code.
