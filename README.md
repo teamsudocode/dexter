@@ -2,7 +2,7 @@
 
 Ever wondered if you could talk to your computer in your natural language, and it writes the code for you, and that too in your favorite language?
 
-#### Dexter is an AI-based code editor that allows you to code parallely in Javascript and Python just by conversing with it. It supports two of the most widely used languages in the country, Hindi and English.
+#### Dexter is an AI-based code editor that allows you to code parallelly in Javascript and Python just by conversing with it. It supports two of the most widely used languages in the country, Hindi and, English.
 
 Won 1st Prize at Hack36, MNNIT Allahabad.
 
