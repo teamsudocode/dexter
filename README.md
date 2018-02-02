@@ -6,7 +6,7 @@ Ever wondered if you could talk to your computer in your natural language, and i
 
 Won 1st Prize at Hack36, MNNIT Allahabad.
 
-[Watch the Demo Video](https://www.youtube.com/edit?o=U&video_id=qFzCyY3lHZE)
+[Watch the Demo Video](https://www.youtube.com/watch?v=qFzCyY3lHZE)
 
 [View the Presentation](https://drive.google.com/file/d/1ziJM2d6zE2I5KthzUSVCVK7HWTWhoQ4A/view?usp=sharing)
 
