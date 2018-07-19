@@ -13,7 +13,7 @@ Won 1st Prize at Hack36, MNNIT Allahabad.
 ### How to run
 
 ```
-$ git clone https://github.com/himanshub16/dexter.git
+$ git clone https://github.com/teamsudocode/dexter.git
 $ cd dexter
 $ pip install --user flask flask-cors zulip
 $ python3 app.py
